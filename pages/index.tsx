@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { Header } from '../components/Header';
 
 export default function Home() {
   return (
@@ -9,10 +10,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex flex-col h-screen w-screen justify-center items-center"></main>
-      <footer className="w-full h-full bg-slate-400 flex justify-around">
-        <h1>Next JS E-Commerce</h1>
-        <h1>Sanberk Türker</h1>
+      <main className="flex flex-col h-screen justify-center items-center">
+        <Header />
+        <section className="h-full w-full"></section>
+      </main>
+      <footer className="w-full h-full bg-blue-300 p-1 flex justify-around items-center">
+        <h2 className="text-lg font-bold">Next JS E-Commerce</h2>
+        <h2 className="text-lg font-bold">Sanberk Türker</h2>
       </footer>
     </div>
   );
