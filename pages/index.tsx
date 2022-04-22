@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import Head from 'next/head';
 import { Header } from '../components/Header';
+import { Categories } from './../components/Categories';
 
 export default function Home() {
   return (
@@ -12,7 +14,9 @@ export default function Home() {
 
       <main className="flex flex-col h-screen justify-center items-center">
         <Header />
-        <section className="h-full w-full"></section>
+        <section className="h-full w-full px-4">
+          <Categories />
+        </section>
       </main>
       <footer className="w-full h-full bg-blue-300 p-1 flex justify-around items-center">
         <h2 className="text-lg font-bold">Next JS E-Commerce</h2>
