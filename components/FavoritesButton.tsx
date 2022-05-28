@@ -12,7 +12,7 @@ export const FavoritesButton: React.FC = () => {
   return (
     <button
       onClick={clickHandler}
-      className="flex items-center justify-center gap-2 hover:fill-red-500 hover:text-red-500"
+      className="flex items-center justify-center gap-2 hover:fill-white hover:text-white"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
