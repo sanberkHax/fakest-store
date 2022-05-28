@@ -6,6 +6,7 @@ import { Header } from '../../components/Header';
 import { useProducts } from './../../hooks/useProducts';
 import { useRouter } from 'next/router';
 import { Ring } from 'react-awesome-spinners';
+import { Footer } from './../../components/Footer';
 
 export default function ProductDetails() {
   const router = useRouter();
@@ -51,10 +52,7 @@ export default function ProductDetails() {
           ))}
         </section>
       </main>
-      <footer className="bg-blue-300 p-1 flex justify-around items-center">
-        <h2 className="text-lg font-bold">Next JS E-Commerce</h2>
-        <h2 className="text-lg font-bold">Sanberk Türker</h2>
-      </footer>
+      <Footer />
     </div>
   );
 }

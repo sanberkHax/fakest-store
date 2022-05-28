@@ -4,6 +4,7 @@ import { ProductItem } from '../components/ProductItem';
 import { Categories } from './../components/Categories';
 import { useProducts } from './../hooks/useProducts';
 import { Ring } from 'react-awesome-spinners';
+import { Footer } from './../components/Footer';
 
 export default function Home() {
   const { products, productsLoading, productsError } = useProducts();
@@ -40,10 +41,7 @@ export default function Home() {
           ))}
         </section>
       </main>
-      <footer className="bg-blue-300 p-1 flex justify-around items-center">
-        <h2 className="text-lg font-bold">Next JS E-Commerce</h2>
-        <h2 className="text-lg font-bold">Sanberk Türker</h2>
-      </footer>
+      <Footer />
     </div>
   );
 }
