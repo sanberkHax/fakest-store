@@ -12,7 +12,7 @@ export default function ProductDetails() {
 
   const { id } = router.query;
 
-  const category = (id as string).replace('-', ' ');
+  const category = (id as string)?.replace('-', ' ');
 
   const { products, productsLoading, productsError } = useProducts();
 
