@@ -23,31 +23,29 @@ export default function ProductDetails() {
     return <p className="text-red-500 text-center">Failed to fetch products</p>;
 
   return (
-    <div className="flex flex-col h-screen justify-between">
+    <div className="flex flex-col h-screen">
       <Head>
         <title>{product.title}</title>
         <meta name="description" content={product.description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex flex-col justify-center items-center ">
-        <Header />
-        <Categories />
-        <section className="flex flex-col justify-center items-center gap-5 p-4 text-center">
-          <div className="relative w-52 h-52 bg-white">
-            <Image
-              src={product.image}
-              layout="fill"
-              objectFit="contain"
-              unoptimized
-            ></Image>
-          </div>
-          <h1 className="font-bold text-xl">{product.title}</h1>
-          <h2 className="text-orange-600 font-bold text-xl">{`$${product.price}`}</h2>
-          <p>{product.description}</p>
-          <button className="font-bold rounded-md bg-yellow-400 p-3 hover:bg-yellow-300">
-            Add To Cart
-          </button>
-        </section>
+      <Header />
+      <Categories />
+      <main className="flex flex-col justify-around items-center h-full p-20 text-center">
+        <div className="relative w-52 h-52 bg-white">
+          <Image
+            src={product.image}
+            layout="fill"
+            objectFit="contain"
+            unoptimized
+          ></Image>
+        </div>
+        <h1 className="font-bold text-xl">{product.title}</h1>
+        <h2 className="text-orange-600 font-bold text-xl">{`$${product.price}`}</h2>
+        <p>{product.description}</p>
+        <button className="font-bold rounded-md bg-yellow-400 p-3 hover:bg-yellow-300">
+          Add To Cart
+        </button>
       </main>
       <footer className="bg-blue-300 p-1 flex justify-around items-center">
         <h2 className="text-lg font-bold">Next JS E-Commerce</h2>

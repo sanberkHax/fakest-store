@@ -29,16 +29,16 @@ export default function ProductDetails() {
   const filteredProducts = products.filter((p) => p.category === category);
 
   return (
-    <div className="flex flex-col justify-between h-screen">
+    <div className="flex flex-col h-screen">
       <Head>
         <title>{category.toUpperCase()}</title>
         <meta name="description" content={`Products in ${category} category`} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex flex-col justify-center items-center">
-        <Header />
-        <Categories />
+      <Header />
+      <Categories />
+      <main className="flex flex-col justify-center items-center h-full">
         <section className="grid grid-cols-2 h-full p-10 gap-10">
           {filteredProducts?.map((p) => (
             <ProductItem

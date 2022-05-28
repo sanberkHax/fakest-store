@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const Categories: React.FC = () => {
   return (
-    <ul className="flex justify-around gap-5 p-4">
+    <ul className="flex justify-center gap-5 p-4 h-10">
       <li className="cursor-pointer hover:font-bold">
         <Link href="/categories/electronics">
           <a>Electronics</a>
