@@ -25,7 +25,7 @@ export default function Home({
               id={p.id}
               title={p.title}
               image={p.image}
-              price={p.price}
+              price={`$${p.price}`}
             />
           ))}
         </section>

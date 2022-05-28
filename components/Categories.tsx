@@ -3,18 +3,26 @@ import Link from 'next/link';
 
 export const Categories: React.FC = () => {
   return (
-    <ul className="flex justify-around gap-5">
+    <ul className="flex justify-around gap-5 p-4">
       <li className="cursor-pointer hover:font-bold">
-        <Link href="/categories/electronics">Electronics</Link>
+        <Link href="/categories/electronics">
+          <a>Electronics</a>
+        </Link>
       </li>
       <li className="cursor-pointer hover:font-bold">
-        <Link href="/categories/jewelery">Jewelery</Link>
+        <Link href="/categories/jewelery">
+          <a>Jewelery</a>
+        </Link>
       </li>
       <li className="cursor-pointer hover:font-bold">
-        <Link href="/categories/men's-clothing">Men's Clothing</Link>
+        <Link href="/categories/men's-clothing">
+          <a>Men's Clothing</a>
+        </Link>
       </li>
       <li className="cursor-pointer hover:font-bold">
-        <Link href="/categories/women's-clothing">Women's Clothing</Link>
+        <Link href="/categories/women's-clothing">
+          <a>Women's Clothing</a>
+        </Link>
       </li>
     </ul>
   );
