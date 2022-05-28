@@ -1,12 +1,23 @@
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
 import { Header } from '../components/Header';
 import { ProductItem } from '../components/ProductItem';
 import { Categories } from './../components/Categories';
+import { useProducts } from './../hooks/useProducts';
+import { Ring } from 'react-awesome-spinners';
 
-export default function Home({
-  products,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Home() {
+  const { products, productsLoading, productsError } = useProducts();
+
+  if (productsLoading)
+    return (
+      <div className="flex justify-center items-center">
+        <Ring />
+      </div>
+    );
+
+  if (productsError)
+    return <p className="text-red-500 text-center">Failed to fetch products</p>;
+
   return (
     <div className="flex flex-col">
       <Head>
@@ -37,9 +48,3 @@ export default function Home({
     </div>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const response = await fetch('https://fakestoreapi.com/products');
-  const products = await response.json();
-  return { props: { products } };
-};

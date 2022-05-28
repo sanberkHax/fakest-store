@@ -3,12 +3,31 @@ import Head from 'next/head';
 import { Categories } from '../../components/Categories';
 import { ProductItem } from '../../components/ProductItem';
 import { Header } from '../../components/Header';
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { useProducts } from './../../hooks/useProducts';
+import { useRouter } from 'next/router';
+import { Ring } from 'react-awesome-spinners';
 
-export default function ProductDetails({
-  products,
-  category,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function ProductDetails() {
+  const router = useRouter();
+
+  const { id } = router.query;
+
+  const category = (id as string).replace('-', ' ');
+
+  const { products, productsLoading, productsError } = useProducts();
+
+  if (productsLoading)
+    return (
+      <div className="flex justify-center items-center">
+        <Ring />
+      </div>
+    );
+
+  if (productsError)
+    return <p className="text-red-500 text-center">Failed to fetch products</p>;
+
+  const filteredProducts = products.filter((p) => p.category === category);
+
   return (
     <div className="flex flex-col justify-between h-screen">
       <Head>
@@ -21,7 +40,7 @@ export default function ProductDetails({
         <Header />
         <Categories />
         <section className="grid grid-cols-2 h-full p-10 gap-10">
-          {products?.map((p) => (
+          {filteredProducts?.map((p) => (
             <ProductItem
               key={p.id}
               id={p.id}
@@ -39,13 +58,3 @@ export default function ProductDetails({
     </div>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const id = context.params.id;
-  const category = (id as string).replace('-', ' ');
-  const response = await fetch(
-    `https://fakestoreapi.com/products/category/${category}`
-  );
-  const products = await response.json();
-  return { props: { products, category } };
-};

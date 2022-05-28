@@ -1,13 +1,27 @@
 import React from 'react';
 import Image from 'next/image';
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
 import { Header } from './../../components/Header';
 import { Categories } from './../../components/Categories';
+import { useProduct } from './../../hooks/useProduct';
+import { useRouter } from 'next/router';
+import { Ring } from 'react-awesome-spinners';
 
-export default function ProductDetails({
-  product,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function ProductDetails() {
+  const router = useRouter();
+
+  const { id } = router.query;
+  const { product, productLoading, productError } = useProduct(id);
+
+  if (productLoading)
+    return (
+      <div className="flex justify-center items-center">
+        <Ring />
+      </div>
+    );
+  if (productError)
+    return <p className="text-red-500 text-center">Failed to fetch products</p>;
+
   return (
     <div className="flex flex-col h-screen justify-between">
       <Head>
@@ -42,10 +56,3 @@ export default function ProductDetails({
     </div>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const id = context.params.id;
-  const response = await fetch(`https://fakestoreapi.com/products/${id}`);
-  const product = await response.json();
-  return { props: { product } };
-};
