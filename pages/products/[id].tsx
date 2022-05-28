@@ -2,7 +2,6 @@ import React from 'react';
 import Image from 'next/image';
 import Head from 'next/head';
 import { Header } from './../../components/Header';
-import { Categories } from './../../components/Categories';
 import { useProduct } from './../../hooks/useProduct';
 import { useRouter } from 'next/router';
 import { Ring } from 'react-awesome-spinners';
@@ -31,18 +30,17 @@ export default function ProductDetails() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <Categories />
-      <main className="flex flex-col justify-around items-center h-full p-20 text-center">
-        <div className="relative w-52 h-52 bg-white">
+      <main className="flex flex-col justify-around items-center h-full p-10 sm:p-20 text-center gap-4 lg:px-24 2xl:px-72">
+        <div className="relative w-36 h-36 sm:w-52 sm:h-52 bg-white">
           <Image
             src={product.image}
             layout="fill"
             objectFit="contain"
             unoptimized
-          ></Image>
+          />
         </div>
-        <h1 className="font-bold text-xl">{product.title}</h1>
-        <h2 className="text-orange-600 font-bold text-xl">{`$${product.price}`}</h2>
+        <h1 className="font-bold text-lg sm:text-xl">{product.title}</h1>
+        <h2 className="text-orange-600 font-bold text-lg sm:text-xl">{`$${product.price}`}</h2>
         <p>{product.description}</p>
         <button className="font-bold rounded-md bg-yellow-400 p-3 hover:bg-yellow-300">
           Add To Cart

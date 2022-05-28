@@ -1,6 +1,5 @@
 import React from 'react';
 import Head from 'next/head';
-import { Categories } from '../../components/Categories';
 import { ProductItem } from '../../components/ProductItem';
 import { Header } from '../../components/Header';
 import { useProducts } from './../../hooks/useProducts';
@@ -30,7 +29,7 @@ export default function ProductDetails() {
   const filteredProducts = products.filter((p) => p.category === category);
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col min-h-screen justify-between">
       <Head>
         <title>{category.toUpperCase()}</title>
         <meta name="description" content={`Products in ${category} category`} />
@@ -38,19 +37,16 @@ export default function ProductDetails() {
       </Head>
 
       <Header />
-      <Categories />
-      <main className="flex flex-col justify-center items-center h-full">
-        <section className="grid grid-cols-2 h-full p-10 gap-10">
-          {filteredProducts?.map((p) => (
-            <ProductItem
-              key={p.id}
-              id={p.id}
-              title={p.title}
-              image={p.image}
-              price={`$${p.price}`}
-            />
-          ))}
-        </section>
+      <main className="grid grid-cols-1 sm:grid-cols-2 h-full p-10 gap-10 lg:px-24 2xl:px-72">
+        {filteredProducts?.map((p) => (
+          <ProductItem
+            key={p.id}
+            id={p.id}
+            title={p.title}
+            image={p.image}
+            price={`$${p.price}`}
+          />
+        ))}
       </main>
       <Footer />
     </div>
