@@ -5,16 +5,28 @@ import { Footer } from './../components/Footer';
 import { CartContext } from './../store/cart-context';
 import { CartItem } from '../components/CartItem';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export default function Cart() {
-  const { productsInCart, calcTotalPrice, updateTotalAmount, totalPrice } =
-    useContext(CartContext);
+  const {
+    productsInCart,
+    calcTotalPrice,
+    updateTotalAmount,
+    totalPrice,
+    resetCart,
+  } = useContext(CartContext);
 
   useEffect(() => {
     calcTotalPrice();
     updateTotalAmount();
   }, [productsInCart]);
 
+  const router = useRouter();
+
+  const checkoutHandler = () => {
+    resetCart();
+    router.push('/checkout');
+  };
   return (
     <div className="flex flex-col min-h-screen">
       <Head>
@@ -38,7 +50,10 @@ export default function Cart() {
               ))}
             </ul>
             <p className="font-bold">Total Price:${totalPrice}</p>
-            <button className="bg-yellow-400 hover:bg-yellow-300 rounded-md p-3 font-bold ">
+            <button
+              className="bg-yellow-400 hover:bg-yellow-300 rounded-md p-3 font-bold "
+              onClick={checkoutHandler}
+            >
               Checkout
             </button>
           </div>

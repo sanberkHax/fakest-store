@@ -22,6 +22,7 @@ type CartContextType = {
   updateTotalAmount: () => void;
   changePrice: (id: number, amount: number) => void;
   calcTotalPrice: () => void;
+  resetCart: () => void;
 };
 
 export const CartContext = React.createContext<CartContextType>({
@@ -35,6 +36,7 @@ export const CartContext = React.createContext<CartContextType>({
   updateTotalAmount: () => {},
   changePrice: () => {},
   calcTotalPrice: () => {},
+  resetCart: () => {},
 });
 
 export function CartContextProvider(props) {
@@ -107,6 +109,12 @@ export function CartContextProvider(props) {
     updateTotalAmount();
   };
 
+  const resetCart = () => {
+    setTotalAmount(0);
+    setProductsInCart([]);
+    setTotalPrice(0);
+  };
+
   const updateTotalAmount = () => {
     // Update total amount of products inside the cart
     if (productsInCart.length === 0) {
@@ -127,6 +135,7 @@ export function CartContextProvider(props) {
       productsInCart,
       totalAmount,
       totalPrice,
+      resetCart,
       setProductsInCart,
       addProduct,
       updateProducts,
