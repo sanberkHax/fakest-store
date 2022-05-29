@@ -38,7 +38,7 @@ export const CartItem: React.FC<CartItem> = ({ amount, id, total, title }) => {
   return (
     <li className="p-4 items-center gap-10 text-center sm:text-left flex flex-col sm:flex-row justify-between border-b-4">
       <p className="flex-1 ">{title}</p>
-      <p className="">${total}</p>
+      <p>${total}</p>
       <input
         type="number"
         name="amount"

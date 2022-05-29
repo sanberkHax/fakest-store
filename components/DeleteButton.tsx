@@ -1,10 +1,10 @@
 import React from 'react';
 
-export const DeleteButton = ({
-  onClick,
-}: {
+interface IDeleteButton {
   onClick: React.MouseEventHandler<SVGSVGElement>;
-}) => {
+}
+
+export const DeleteButton: React.FC<IDeleteButton> = ({ onClick }) => {
   const clickHandler = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
     onClick(e);
   };

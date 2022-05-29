@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import React from 'react';
 import { Header } from '../components/Header';
 import { ProductItem } from '../components/ProductItem';
 import { useProducts } from './../hooks/useProducts';
