@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Image from 'next/image';
 import Head from 'next/head';
 import { Header } from './../../components/Header';
@@ -6,12 +6,24 @@ import { useProduct } from './../../hooks/useProduct';
 import { useRouter } from 'next/router';
 import { Ring } from 'react-awesome-spinners';
 import { Footer } from './../../components/Footer';
+import { CartContext } from '../../store/cart-context';
 
 export default function ProductDetails() {
   const router = useRouter();
+  const { addProduct, changeTotalAmount } = useContext(CartContext);
 
   const { id } = router.query;
   const { product, productLoading, productError } = useProduct(id);
+
+  const addToCartHandler = () => {
+    const productInCart = {
+      ...product,
+      amount: 1,
+      total: Number(product.price),
+    };
+    addProduct(productInCart);
+    changeTotalAmount(1);
+  };
 
   if (productLoading)
     return (
@@ -42,7 +54,10 @@ export default function ProductDetails() {
         <h1 className="font-bold text-lg sm:text-xl">{product.title}</h1>
         <h2 className="text-orange-600 font-bold text-lg sm:text-xl">{`$${product.price}`}</h2>
         <p>{product.description}</p>
-        <button className="font-bold rounded-md bg-yellow-400 p-3 hover:bg-yellow-300">
+        <button
+          onClick={addToCartHandler}
+          className="font-bold rounded-md bg-yellow-400 p-3 hover:bg-yellow-300"
+        >
           Add To Cart
         </button>
       </main>
