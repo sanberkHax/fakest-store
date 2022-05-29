@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Image from 'next/image';
 import Head from 'next/head';
 import { Header } from './../../components/Header';
@@ -11,6 +11,7 @@ import { CartContext } from '../../store/cart-context';
 export default function ProductDetails() {
   const router = useRouter();
   const { addProduct, changeTotalAmount } = useContext(CartContext);
+  const [loadingWarning, setLoadingWarning] = useState(false);
 
   const { id } = router.query;
   const { product, productLoading, productError } = useProduct(id);
@@ -25,12 +26,25 @@ export default function ProductDetails() {
     changeTotalAmount(1);
   };
 
-  if (productLoading)
+  if (productLoading) {
+    setTimeout(() => {
+      setLoadingWarning(true);
+    }, 3000);
     return (
-      <div className="flex justify-center items-center">
+      <div className="flex flex-col justify-center items-center text-center">
         <Ring />
+        {loadingWarning && (
+          <>
+            <p>
+              Sometimes Fake Store API is very slow, there's no problem on the
+              client side.
+            </p>
+            <p> Please wait, it will load.</p>
+          </>
+        )}
       </div>
     );
+  }
   if (productError)
     return <p className="text-red-500 text-center">Failed to fetch products</p>;
 

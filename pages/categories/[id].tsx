@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import { ProductItem } from '../../components/ProductItem';
 import { Header } from '../../components/Header';
@@ -8,6 +8,8 @@ import { Ring } from 'react-awesome-spinners';
 import { Footer } from './../../components/Footer';
 
 export default function ProductDetails() {
+  const [loadingWarning, setLoadingWarning] = useState(false);
+
   const router = useRouter();
 
   const { id } = router.query;
@@ -16,12 +18,25 @@ export default function ProductDetails() {
 
   const { products, productsLoading, productsError } = useProducts();
 
-  if (productsLoading)
+  if (productsLoading) {
+    setTimeout(() => {
+      setLoadingWarning(true);
+    }, 3000);
     return (
-      <div className="flex justify-center items-center">
+      <div className="flex flex-col justify-center items-center text-center">
         <Ring />
+        {loadingWarning && (
+          <>
+            <p>
+              Sometimes Fake Store API is very slow, there's no problem on the
+              client side.
+            </p>
+            <p> Please wait, it will load.</p>
+          </>
+        )}
       </div>
     );
+  }
 
   if (productsError)
     return <p className="text-red-500 text-center">Failed to fetch products</p>;

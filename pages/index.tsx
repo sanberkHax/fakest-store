@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React from 'react';
+import React, { useState } from 'react';
 import { Header } from '../components/Header';
 import { ProductItem } from '../components/ProductItem';
 import { useProducts } from './../hooks/useProducts';
@@ -8,14 +8,27 @@ import { Footer } from './../components/Footer';
 
 export default function Home() {
   const { products, productsLoading, productsError } = useProducts();
+  const [loadingWarning, setLoadingWarning] = useState(false);
 
-  if (productsLoading)
+  if (productsLoading) {
+    setTimeout(() => {
+      setLoadingWarning(true);
+    }, 3000);
     return (
-      <div className="flex justify-center items-center">
+      <div className="flex flex-col justify-center items-center text-center">
         <Ring />
+        {loadingWarning && (
+          <>
+            <p>
+              Sometimes Fake Store API is very slow, there's no problem on the
+              client side.
+            </p>
+            <p> Please wait, it will load.</p>
+          </>
+        )}
       </div>
     );
-
+  }
   if (productsError)
     return <p className="text-red-500 text-center">Failed to fetch products</p>;
 
