@@ -1,6 +1,5 @@
 import React from 'react';
 import { CartButton } from './CartButton';
-import { FavoritesButton } from './FavoritesButton';
 import Link from 'next/link';
 import { Categories } from './Categories';
 
@@ -14,7 +13,6 @@ export const Header: React.FC = () => {
           </h1>
         </Link>
         <div className="flex justify-between gap-5 items-center">
-          <FavoritesButton />
           <CartButton />
         </div>
       </div>
